@@ -1,0 +1,15 @@
+*.iws
+.gradle
+build
+out
+.idea
+*.iml
+*.ipr
+.classpath
+.gitignore.swp
+.project
+.settings/
+gradle.properties
+*.log
+*.log.*
+
