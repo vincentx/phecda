@@ -8,36 +8,30 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static phecda.core.Adaptable.getAdapter;
 
 public class AdapterTest {
-    private Adaptable something = new SomethingAdaptable();
-
     @Test
     public void should_use_first_applicable_adapter_provider() {
-        assertThat(something.getAdapter(String.class), is(of("adopt")));
+        assertThat(getAdapter("5", Integer.class), is(of(5)));
     }
 
     @Test
     public void should_return_empty_if_cannot_adapt_to_adapter_type() {
-        assertThat(something.getAdapter(Date.class), is(empty()));
+        assertThat(getAdapter("5", Date.class), is(empty()));
     }
 
-    public static class SomethingAdaptable implements Adaptable {
-    }
-
-    public static class SomethingToAdopt implements AdapterProvider<SomethingAdaptable, String> {
-
+    public static class StringToInt implements Adaptable<String, Integer> {
         @Override
-        public String getAdapter(SomethingAdaptable somethingAdaptable) {
-            return "adopt";
+        public Integer getAdapter(String string) {
+            return Integer.parseInt(string);
         }
     }
 
-    public static class SomethingToNothing implements AdapterProvider<SomethingAdaptable, String> {
-
+    public static class StringToNegativeInt implements Adaptable<String, Integer> {
         @Override
-        public String getAdapter(SomethingAdaptable somethingAdaptable) {
-            return "nothing";
+        public Integer getAdapter(String string) {
+            return -Integer.parseInt(string);
         }
     }
 }
