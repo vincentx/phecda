@@ -1,0 +1,11 @@
+ext {
+    servletVersion = '3.1.0'
+    grizzlyVersion = '2.3.14'
+}
+
+dependencies {
+    compile "javax.servlet:javax.servlet-api:$servletVersion"
+
+    compile "org.glassfish.grizzly:grizzly-framework:$grizzlyVersion"
+    compile "org.glassfish.grizzly:grizzly-http-servlet:$grizzlyVersion"
+}
